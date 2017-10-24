@@ -1,4 +1,5 @@
-#Chef 12 on VirtualBox and Vagrant 
+Chef 12 on VirtualBox and Vagrant 
+=================================
 Spin up VirtualBox VM and install Chef server 12 in it using Vagrant and Ansible
 
 ##Install Virtual Box on MAC:
