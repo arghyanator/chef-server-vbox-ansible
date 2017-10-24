@@ -41,8 +41,6 @@ Modify Vagrantfile to add ansible:
 ==================================
 
 $ egrep -v "^$|^#| #" Vagrantfile 
-
-$ egrep -v "^$|^#| #" Vagrantfile 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
     config.vm.provider "virtualbox" do |vb|
