@@ -3,17 +3,17 @@ Chef 12 on VirtualBox and Vagrant
 
 Spin up VirtualBox VM and install Chef server 12 in it using Vagrant and Ansible
 
-##Install Virtual Box on MAC:
-
+Install Virtual Box on MAC:
+---------------------------
 http://download.virtualbox.org/virtualbox/5.1.30/VirtualBox-5.1.30-118389-OSX.dmg
 
-##Install Vagrant:
-
+Install Vagrant:
+----------------
 https://releases.hashicorp.com/vagrant/2.0.0/vagrant_2.0.0_x86_64.dmg
 
 
-##Install Ubuntu/Xenial 16.04 Virtual VM using Vagrant:
-
+Install Ubuntu/Xenial 16.04 Virtual VM using Vagrant:
+------------------------------------------------------
 ```
 $ mkdir my_vagrant
 $ cd my_vagrant
@@ -31,18 +31,19 @@ $ vagrant box list
 ubuntu/xenial64 (virtualbox, 20171011.0.0)
 ```
 
-##Install Ansible on MAC (where vagrant / virtualbox is running):
-
-###Install Homebrew on MAC:
+Install Ansible on MAC (where vagrant / virtualbox is running):
+---------------------------------------------------------------
+**Install Homebrew on MAC:**
 ```
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-###Install ansible:
+**Install ansible:**
 ```
 $ brew install ansible
 ```
-##Modify Vagrantfile to add ansible:
 
+Modify Vagrantfile to add ansible:
+----------------------------------
 ```
 $ egrep -v "^$|^#| #" Vagrantfile 
 Vagrant.configure("2") do |config|
@@ -61,8 +62,8 @@ Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 443, host: 8443, id: "chefssl"
 end
 ```
-##Boot up VM and Install Chef 12 in it using Vagrant
-
+Boot up VM and Install Chef 12 in it using Vagrant
+--------------------------------------------------
 ```
 $ vagrant up
 ```
