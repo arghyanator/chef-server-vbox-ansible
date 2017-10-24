@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: Chek if Chef 12 is chef_installed
+      command: dpkg-query -W chef-server-core_12.17.3-1_amd64.deb
+      register: chef_installed
+      failed_when: chef_installed.rc > 1
+      changed_when: chef_installed.rc == 1
+
+    - name: Download Chef 12 server
+      get_url:
+        url="https://packages.chef.io/files/stable/chef-server/12.17.3/ubuntu/16.04/chef-server-core_12.17.3-1_amd64.deb"
+        dest="/root"
+      when: chef_installed.rc == 1
+
+    - name: install Chef 12 server package
+      apt: deb="/root/chef-server-core_12.17.3-1_amd64.deb"
+      become: true
+      when: chef_installed.rc == 1
+
+    #chef-server-ctl user-create USERNAME FIRST_NAME LAST_NAME EMAIL PASSWORD
+    #chef-server-ctl org-create SHORTNAME LONGNAME --association_user USERNAME
+    - name: configure Chef 12 server
+      command: "{{ item }}"
+      with_items:
+        - chef-server-ctl reconfigure
+        - chef-server-ctl user-create admin admin admin admin@example.com <PASSWORD> -f /home/ubuntu/admin.pem
+        - chef-server-ctl org-create orghotest "Orgho's Test Chef ORG" --association_user admin -f /home/ubuntu/orghotest-validator.pem
+      ignore_errors: true
+      when: chef_installed.rc == 1
+
+    - name: configure Chef-Manage
+      command: "{{ item }}"
+      with_items:
+        - chef-server-ctl install chef-manage
+        - chef-server-ctl reconfigure
+        - chef-manage-ctl reconfigure --accept-license
+      ignore_errors: true
+      when: chef_installed.rc == 1
+
