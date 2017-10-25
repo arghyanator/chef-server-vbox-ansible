@@ -69,5 +69,8 @@ $ vagrant up
 ```
 
 Once The VM has finished configuring with Chef you may connect to it using Chef-Manage UI on 
-https://localhost:8443 from your Mac.
+https://localhost:8443/login from your Mac.
 
+Chef Manage UI
+--------------
+![chef manage UI](https://github.com/arghyanator/jenkins_vbox/blob/master/jenkins_setup.png)
