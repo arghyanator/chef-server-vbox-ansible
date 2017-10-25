@@ -73,4 +73,4 @@ https://localhost:8443/login from your Mac.
 
 Chef Manage UI
 --------------
-![chef manage UI](https://github.com/arghyanator/jenkins_vbox/blob/master/jenkins_setup.png)
+![chef manage UI](https://github.com/arghyanator/chef-server-vbox-ansible/blob/master/chef-manage.png)
